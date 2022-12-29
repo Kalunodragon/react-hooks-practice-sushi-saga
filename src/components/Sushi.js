@@ -1,20 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 
-function Sushi(props) {
+function Sushi({ name, image, price, callback }) {
+  const [ avaliable, setAvaliable ] = useState(true)
+
+  function handleClick(){
+    if(avaliable){
+      callback(price)
+      setAvaliable(state => !state)
+    } else {
+      window.alert("Sorry the sushi you are looking for has already been eaten!")
+    }
+  }
+
   return (
     <div className="sushi">
-      <div className="plate" onClick={/* Give me a callback! */ null}>
+      <div className="plate" onClick={handleClick}>
         {/* Tell me if this sushi has been eaten! */}
-        {false ? null : (
+        {avaliable ? (
           <img
-            src={/* Give me an image source! */ null}
-            alt={/* Give me a name! */ "Sushi"}
+            src={image}
+            alt={name}
             width="100%"
           />
-        )}
+        ) : null}
       </div>
       <h4 className="sushi-details">
-        {/* Give me a name! */} - ${/* Give me a price! */}
+        {name} - ${price}
       </h4>
     </div>
   );
